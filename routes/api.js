@@ -3,6 +3,41 @@ const axios = require("axios");
 const APIKey = "e6182f94e241fdadf1c2eb9e58710edc";
 // used onecall API to get 7 day data, documentation here: https://openweathermap.org/api/one-call-api
 
+const titleCase = (str) => {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); //capitalize first letter and joins with index[1] to end of string
+    }
+    return str.join(' ');
+}
+
+//Function to get lat lon coordinates
+const coordCall = (str) => {
+    let cityName = titleCase(str)
+    //Build URL we need to query the weather database
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
+    return axios.get(queryURL)
+    .then(response => {
+        let coordObj = {
+            lat: response.data.coord.lat,
+            lon: response.data.coord.lon
+        }
+        return coordObj;
+    });
+}
+
+// grab forecasted city data
+const getForecast = (response) => {
+    let cityForecast = new Array;
+    const days = [1, 2, 3];
+
+    days.forEach(day => {
+        const foreTempF = Math.floor((response.data.daily[day].temp.day - 273.15) * 1.80 + 32);
+        cityForecast.push(foreTempF);
+    });
+    return cityForecast;
+}    
+
 //Function to get weather data from API
 const weatherCall = (lat, lon) => {
     //Build URL we need to query the weather database
@@ -31,19 +66,8 @@ const weatherCall = (lat, lon) => {
     .catch(err => console.log(err));
 }
 
-// grab forecasted city data
-const getForecast = (response) => {
-    let cityForecast = new Array;
-    const days = [1, 2, 3];
-
-    days.forEach(day => {
-        const foreTempF = Math.floor((response.data.daily[day].temp.day - 273.15) * 1.80 + 32);
-        cityForecast.push(foreTempF);
-    });
-    return cityForecast;
-}    
-
 // // // module.exports is an object used to store variables or methods
 module.exports = {
-    weatherCall
+    weatherCall,
+    coordCall
 }
