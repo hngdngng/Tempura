@@ -7,7 +7,7 @@ const methods = require("./methods");
 
 // ROUTING
 module.exports = app => {
-    app.get("/", (req, res) => {
+    app.get("/api", (req, res) => {
         api.weatherCall(30.2240897, -92.01984270000003)
         .then(data => {
             data.mean = methods.mean(data.forecast);
