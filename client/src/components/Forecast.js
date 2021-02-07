@@ -9,8 +9,9 @@ const useStyles = makeStyles(() => ({
         color: "black",
     },
     img: {
-        maxWidth: "50%",
-        display: "block"
+        maxWidth: "40%",
+        display: "block",
+        margin: "5px 10px"
     }
 }));
 
