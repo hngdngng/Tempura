@@ -28,7 +28,7 @@ const mode = (arr) => {
     // create a cache object to track count
     // assume arr is not empty
     let modeObj = {};
-    let modeNum = "No repeating temperatures";
+    let modeNum = "No repeating day temps for next 3 days";
     let maxCount = 1;
     arr.forEach(num => {
         if (modeObj[num]) {

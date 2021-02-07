@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // API route
-require("./routes/apiRouting")(app);
+require("./routes/weatherController")(app);
 
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);

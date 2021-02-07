@@ -9,11 +9,10 @@ const coordCall = (cityName) => {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
     return axios.get(queryURL)
     .then(response => {
-        let coordObj = {
+        return {
             lat: response.data.coord.lat,
             lon: response.data.coord.lon
-        }
-        return coordObj;
+        };
     });
 }
 
@@ -45,16 +44,14 @@ const weatherCall = (lat, lon) => {
 
         const cityForecast = getForecast(response);//function to grab forecast data
 
-        let cityObj = {
+        return {
             date: dateConverted,
             temp: tempF,
             desc: desc,
             icon: icon,
-            forecast: cityForecast,
-        }
-        return cityObj;
-    })
-    .catch(err => console.log(err));
+            forecast: cityForecast
+        };
+    });
 }
 
 // // // module.exports is an object used to store variables or methods
