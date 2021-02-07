@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/#/" component={Main} />
+          <Route exact path="/" component={Main} />
           <Route component={NoMatch} />
         </Switch>
       </div>
