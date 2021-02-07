@@ -3,8 +3,7 @@ import API from "../utils/API";
 import Hero from "../components/Hero";
 import Form from "../components/Form";
 import Forecast from "../components/Forecast";
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchAgain from "../components/SearchAgain";
 
 
 const Main = () => {
@@ -35,7 +34,7 @@ const Main = () => {
       .catch((err) => {
         setWeather([]);
         setError(true);
-        setErrorMessage(err.response.data.message);
+        setErrorMessage(titleCase(err.response.data.message));
       });
   };
 
@@ -49,7 +48,7 @@ const Main = () => {
       .catch((err) => {
         setWeather([]);
         setError(true);
-        setErrorMessage(err.response.data.message);
+        setErrorMessage(titleCase(err.response.data.message));
       });
   };
 
@@ -68,24 +67,18 @@ const Main = () => {
       <div>
         {weather.length !== 0 ? (
           <div>
+            <SearchAgain handleNewSearch={handleNewSearch} />
             <Hero text={weather.date} sub={query} />
-            <Forecast temp={weather.temp} mean={weather.mean} median={weather.median} mode={weather.mode} desc={titleCase(weather.desc)}/>
-            <IconButton
-              type="submit"
-              aria-label="search"
-              onClick={handleNewSearch}>
-              <SearchIcon />
-            </IconButton>
-
+            <Forecast temp={weather.temp} mean={weather.mean} median={weather.median} mode={weather.mode} desc={titleCase(weather.desc)} />
           </div>
         ) : (
             <div>
               <Hero text="Weather made easy" sub="Let's find your city" />
               <Form handleInputChange={handleInputChange}
                 handleFormSubmit={handleFormSubmit}
-                query={query} 
+                query={query}
                 error={error}
-                errorMessage={errorMessage}/>
+                errorMessage={errorMessage} />
             </div>
           )}
       </div>
