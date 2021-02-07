@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import API from "../utils/API";
+import Hero from "../components/Hero";
 import Form from "../components/Form";
 
 const Main = () => {
   const [weather, setWeather] = useState([]);
   const [query, setQuery] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleInputChange = event => {
-    setQuery(event.target.value);
+    setQuery(titleCase(event.target.value));
   };
+
+  const titleCase = (str) => {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); //capitalize first letter and joins with index[1] to end of string
+    }
+    return str.join(' ');
+}
 
   const getWeather = (lat, lon) => {
     API.getWeather(lat, lon)
@@ -18,7 +26,6 @@ const Main = () => {
       )
       .catch(() => {
         setWeather([]);
-        setMessage("Let's try that again")
       });
   };
 
@@ -29,7 +36,6 @@ const Main = () => {
       })
       .catch(() => {
         setWeather([]);
-        setMessage("Let's try that again")
       });
   };
 
@@ -37,23 +43,21 @@ const Main = () => {
     event.preventDefault();
     getCoord();
   };
-
-  console.log(weather)
+  
   return (
     <div>
-      <Form
-        handleInputChange={handleInputChange}
-        handleFormSubmit={handleFormSubmit}
-        query={query}
-      />
       <div>
         {weather.length !== 0 ? (
           <div>
-          <h2>{weather.date}</h2>
-          <h2>{weather.temp}</h2>
+          <Hero text={weather.date} sub={query}/>
           </div>
         ) : (
-            <h2 className="text-center">{message}</h2>
+          <div>
+          <Hero text="Weather made easy" sub="Let's find your city"/>
+          <Form handleInputChange={handleInputChange}
+            handleFormSubmit={handleFormSubmit}
+            query={query}/>
+            </div>
           )}
       </div>
     </div>

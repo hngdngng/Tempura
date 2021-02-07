@@ -3,17 +3,8 @@ const axios = require("axios");
 const APIKey = "e6182f94e241fdadf1c2eb9e58710edc";
 // used onecall API to get 7 day data, documentation here: https://openweathermap.org/api/one-call-api
 
-const titleCase = (str) => {
-    str = str.toLowerCase().split(' ');
-    for (var i = 0; i < str.length; i++) {
-        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); //capitalize first letter and joins with index[1] to end of string
-    }
-    return str.join(' ');
-}
-
 //Function to get lat lon coordinates
-const coordCall = (str) => {
-    let cityName = titleCase(str)
+const coordCall = (cityName) => {
     //Build URL we need to query the weather database
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
     return axios.get(queryURL)
