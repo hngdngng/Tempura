@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/Main";
 import NoMatch from "./pages/NoMatch";
 import Navbar from "./components/Navbar";
@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <HashRouter basename={process.env.PUBLIC_URL}>
+    <Router>
       <div className="App">
         <Navbar />
         <Switch>
@@ -15,7 +15,7 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
       </div>
-    </HashRouter>
+    </Router>
   );
 }
 

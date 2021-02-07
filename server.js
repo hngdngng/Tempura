@@ -1,5 +1,6 @@
 // Dependencies
 const express = require("express");
+const PORT = process.env.PORT || 3001;
 const app = express();
 const path = require("path");
 
@@ -15,6 +16,6 @@ if (process.env.NODE_ENV === "production") {
 // API route
 require("./routes/weatherController")(app);
 
-app.listen(process.env.PORT || 3001, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+app.listen(PORT, () => {
+  console.log(`API server now on port ${PORT}!`);
 });
