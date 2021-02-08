@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Form from "../components/Form";
 import Forecast from "../components/Forecast";
 import SearchAgain from "../components/SearchAgain";
+import { Container } from "@material-ui/core";
 
 
 const Main = () => {
@@ -54,7 +55,9 @@ const Main = () => {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    getCoord();
+    if (query) {
+      getCoord();
+    }
   };
 
   const handleNewSearch = event => {
@@ -64,7 +67,7 @@ const Main = () => {
 
   return (
     <div>
-      <div>
+      <Container>
         {weather.length !== 0 ? (
           <div>
             <SearchAgain handleNewSearch={handleNewSearch} />
@@ -73,7 +76,7 @@ const Main = () => {
           </div>
         ) : (
             <div>
-              <Hero text="Weather made easy" sub="Let's find your city" />
+              <Hero text="Keep Looking Up" sub="Let's find your city" />
               <Form handleInputChange={handleInputChange}
                 handleFormSubmit={handleFormSubmit}
                 query={query}
@@ -81,7 +84,7 @@ const Main = () => {
                 errorMessage={errorMessage} />
             </div>
           )}
-      </div>
+      </Container>
     </div>
   );
 }

@@ -19,16 +19,6 @@ const theme = createMuiTheme({
     },
     h6: {
       fontFamily: "'DM Serif Text', serif"
-    },
-    body1: {
-      fontFamily: "'Raleway', sans-serif",
-      lineHeight: 1.8,
-      textAlign: "left"
-    },
-    body2: {
-      fontFamily: "'Raleway', sans-serif",
-      lineHeight: 1.5,
-      textAlign: "left"
     }
   }
 });

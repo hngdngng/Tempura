@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
         padding: "0px 30px",
         textAlign: "left",
         color: "black",
+        marginTop: "10px"
     }
 }));
 
@@ -15,7 +16,7 @@ const Hero = ({text, sub}) => {
     return (
         <div className={classes.hero}>
             <Grid container>
-                <Grid item md={6}>
+                <Grid item>
                     <Typography variant="h3">{text}</Typography>
                     <Typography variant="h4">{sub}</Typography>
                 </Grid>

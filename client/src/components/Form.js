@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
+    background: "rgb(255,255,255,0.2)",
     width: 300,
   },
   input: {
